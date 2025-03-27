@@ -2,8 +2,9 @@ import i18next from 'i18next'
 
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
+import { memo } from 'react'
 
-const Footer = () => {
+const Footer = memo(() => {
   return (
     <Card className="flex text-sm px-3 py-2 border border-b-0 rounded-xl rounded-b-none">
       <CardContent className="flex p-0 gap-16">
@@ -31,6 +32,6 @@ const Footer = () => {
       </CardContent>
     </Card>
   )
-}
+})
 
 export default Footer

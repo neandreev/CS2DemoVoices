@@ -2,6 +2,7 @@ import { Moon, Sun } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { type Theme, useTheme } from '@/themeProvider'
+import { memo, useCallback } from 'react'
 
 const iconByTheme = {
   dark: <Sun />,
@@ -15,18 +16,18 @@ const oppositeTheme: Record<Theme, Theme> = {
   system: 'system'
 }
 
-const ModeToggle = () => {
+const ModeToggle = memo(() => {
   const { theme, setTheme } = useTheme()
 
   return (
     <Button
       className="w-10"
       aria-label="mode-toggle"
-      onClick={() => setTheme(oppositeTheme[theme])}
+      onClick={useCallback(() => setTheme(oppositeTheme[theme]), [setTheme, theme])}
     >
       {iconByTheme[theme]}
     </Button>
   )
-}
+})
 
 export default ModeToggle
