@@ -33,12 +33,16 @@ interface StoreState {
   copyResult: () => void
 }
 
-const isFirstCharNum = (str: string): boolean => str.match(new RegExp(/^\d/)) !== null
+const isFirstCharNum = (str: string): boolean =>
+  str.match(new RegExp(/^\d/)) !== null
+
 const splitPlayersMuteValues = (stringArr: string[]): Players => {
   return stringArr.reduce((players: Players, string: string) => {
-    const [, muteValue, player] = string.match(/^\s*(\d*)\s*(.+)/)!
+    const [muteValue, player] = string.replace(/\s+/g, ' ').split(' ')
 
-    return { ...players, [player]: Number(muteValue) }
+    players[player] = Number(muteValue)
+
+    return players
   }, {})
 }
 
@@ -77,9 +81,10 @@ export const useStore = create<StoreState>((set, get) => ({
   generateResultString: (): void => {
     const selectedValues = get().selectedValues
 
-    const indicesValue = Array.from(selectedValues).reduce((playerValuesSum, playerValue) => {
-      return playerValuesSum + 2 ** playerValue
-    }, 0)
+    const indicesValue = [...selectedValues].reduce(
+      (playerValuesSum, playerValue) => playerValuesSum + 2 ** playerValue,
+      0
+    )
 
     set({ resultString: `tv_listen_voice_indices ${indicesValue}` })
   },

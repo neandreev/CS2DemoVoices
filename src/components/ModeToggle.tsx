@@ -1,6 +1,6 @@
 import { Moon, Sun } from 'lucide-react'
 
-import { Theme, useTheme } from '@/themeProvider'
+import { type Theme, useTheme } from '@/themeProvider'
 import { Button } from '@/components/ui/button'
 
 const iconByTheme = {
