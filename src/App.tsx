@@ -21,6 +21,7 @@ const App = () => {
 
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <div className="absolute inset-0 -z-10 bg-[url(background.png)] bg-center dark:brightness-10 brightness-50 dark:contrast-100 contrast-75" />
       <div className="font-inter h-screen flex flex-col items-center justify-center">
         <div className="flex flex-grow flex-col justify-center gap-4">
           {componentByAppState[appState]}
