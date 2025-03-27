@@ -27,9 +27,10 @@ const PlayersInput = () => {
       <CardHeader>
         <CardTitle>
           {i18next.t('enterString')}
-          <Button variant="outline" className="px-1 h-6 mx-2 rounded-sm" onClick={copyCommand}>
+          <Button variant="outline" className="px-1 h-6 mx-1 rounded-sm" onClick={copyCommand}>
             voice_show_mute
           </Button>
+          {i18next.t('enterStringEnd')}
         </CardTitle>
         <CardDescription>{i18next.t('enterStringDesc')}</CardDescription>
       </CardHeader>
