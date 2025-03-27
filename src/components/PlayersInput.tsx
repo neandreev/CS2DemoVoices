@@ -35,7 +35,7 @@ const PlayersInput = () => {
           {i18next.t('enterString')}
           <Button
             variant="outline"
-            className="px-1 h-6 mx-1 rounded-sm"
+            className="px-1 h-6 mx-1 rounded-sm font-mono"
             onClick={copyCommand}
           >
             voice_show_mute

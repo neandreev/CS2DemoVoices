@@ -21,7 +21,11 @@ const Result = () => {
         <CardDescription>{i18next.t('resultDesc')}</CardDescription>
       </CardHeader>
       <CardContent className="flex justify-between gap-2">
-        <Input className="w-64 resize-none" value={resultString} spellCheck={false} />
+        <Input
+          className="w-64 resize-none font-mono"
+          value={resultString}
+          spellCheck={false}
+        />
         <Button variant="outline" onClick={() => copyResult()}>
           {i18next.t('copy')}
         </Button>
