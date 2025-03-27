@@ -10,7 +10,11 @@ const Footer = () => {
         <div className="items-center">
           <p className="inline">{i18next.t('madeBy')}</p>
           <Button variant="link" className="p-1">
-            <a href="https://github.com/neandreev" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://github.com/neandreev"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               @neandreev
             </a>
           </Button>

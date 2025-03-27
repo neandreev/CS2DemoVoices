@@ -1,9 +1,11 @@
-import type * as React from 'react'
 import * as HoverCardPrimitive from '@radix-ui/react-hover-card'
+import type * as React from 'react'
 
 import { cn } from '@/lib/utils'
 
-const HoverCard = ({ ...props }: React.ComponentProps<typeof HoverCardPrimitive.Root>) => {
+const HoverCard = ({
+  ...props
+}: React.ComponentProps<typeof HoverCardPrimitive.Root>) => {
   return <HoverCardPrimitive.Root data-slot="hover-card" {...props} />
 }
 

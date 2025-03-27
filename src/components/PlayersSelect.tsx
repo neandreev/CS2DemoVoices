@@ -1,8 +1,14 @@
 import i18next from 'i18next'
 
-import { useStore } from '@/store'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle
+} from '@/components/ui/card'
+import { useStore } from '@/store'
 
 const PlayersSelect = () => {
   const { players, selectedValues, toggleSelectedValue } = useStore()

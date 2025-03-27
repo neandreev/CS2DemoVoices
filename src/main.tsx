@@ -1,10 +1,10 @@
 import './index.css'
 
-import React from 'react'
-import i18next from 'i18next'
-import ReactDOM from 'react-dom/client'
-import LanguageDetector from 'i18next-browser-languagedetector'
 import { Analytics } from '@vercel/analytics/react'
+import i18next from 'i18next'
+import LanguageDetector from 'i18next-browser-languagedetector'
+import React from 'react'
+import ReactDOM from 'react-dom/client'
 
 import App from '@/App'
 import { Toaster } from '@/components/ui/sonner'

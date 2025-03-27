@@ -1,9 +1,15 @@
 import i18next from 'i18next'
 
-import { useStore } from '@/store'
 import { Button } from '@/components/ui/button'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle
+} from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { useStore } from '@/store'
 
 const Result = () => {
   const { resultString, copyResult } = useStore()

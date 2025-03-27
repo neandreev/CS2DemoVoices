@@ -1,14 +1,14 @@
 import i18next from 'i18next'
-import { RefreshCcw, ArrowLeft, ArrowRight } from 'lucide-react'
+import { ArrowLeft, ArrowRight, RefreshCcw } from 'lucide-react'
 
-import { AppState, useStore } from '@/store'
-import { ThemeProvider } from '@/themeProvider'
+import Footer from '@/components/Footer'
+import ModeToggle from '@/components/ModeToggle'
 import PlayersInput from '@/components/PlayersInput'
 import PlayersSelect from '@/components/PlayersSelect'
 import Result from '@/components/Result'
-import Footer from '@/components/Footer'
-import ModeToggle from '@/components/ModeToggle'
 import { Button } from '@/components/ui/button'
+import { AppState, useStore } from '@/store'
+import { ThemeProvider } from '@/themeProvider'
 
 const componentByAppState = {
   [AppState.Input]: <PlayersInput />,
@@ -28,13 +28,21 @@ const App = () => {
             <div className="flex gap-2">
               <ModeToggle />
               {appState !== AppState.Input ? (
-                <Button variant="outline" className="w-fit" onClick={() => goToPreviousPage()}>
+                <Button
+                  variant="outline"
+                  className="w-fit"
+                  onClick={() => goToPreviousPage()}
+                >
                   <ArrowLeft />
                   {i18next.t('back')}
                 </Button>
               ) : null}
               {appState !== AppState.Input ? (
-                <Button variant="outline" className="w-fit" onClick={() => goToInputPage()}>
+                <Button
+                  variant="outline"
+                  className="w-fit"
+                  onClick={() => goToInputPage()}
+                >
                   <RefreshCcw />
                   {i18next.t('again')}
                 </Button>

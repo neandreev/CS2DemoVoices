@@ -1,6 +1,6 @@
 import i18next from 'i18next'
-import { create } from 'zustand'
 import { toast } from 'sonner'
+import { create } from 'zustand'
 
 export enum AppState {
   Input = 0,
@@ -33,8 +33,7 @@ interface StoreState {
   copyResult: () => void
 }
 
-const isFirstCharNum = (str: string): boolean =>
-  str.match(new RegExp(/^\d/)) !== null
+const isFirstCharNum = (str: string): boolean => str.match(new RegExp(/^\d/)) !== null
 
 const splitPlayersMuteValues = (stringArr: string[]): Players => {
   return stringArr.reduce((players: Players, string: string) => {

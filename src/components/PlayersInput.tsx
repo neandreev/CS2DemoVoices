@@ -1,9 +1,15 @@
 import i18next from 'i18next'
 
-import { useStore } from '@/store'
 import { Button } from '@/components/ui/button'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle
+} from '@/components/ui/card'
 import { Textarea } from '@/components/ui/textarea'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { useStore } from '@/store'
 
 const placeholder = `Player#     Player Name
   -------     ----------------
@@ -27,7 +33,11 @@ const PlayersInput = () => {
       <CardHeader>
         <CardTitle>
           {i18next.t('enterString')}
-          <Button variant="outline" className="px-1 h-6 mx-1 rounded-sm" onClick={copyCommand}>
+          <Button
+            variant="outline"
+            className="px-1 h-6 mx-1 rounded-sm"
+            onClick={copyCommand}
+          >
             voice_show_mute
           </Button>
           {i18next.t('enterStringEnd')}
