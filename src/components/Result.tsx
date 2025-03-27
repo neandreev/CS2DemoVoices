@@ -22,7 +22,7 @@ const Result = () => {
       </CardHeader>
       <CardContent className="flex justify-between gap-2">
         <Input
-          className="w-64 resize-none font-mono"
+          className="w-70 resize-none font-mono"
           value={resultString}
           spellCheck={false}
         />
