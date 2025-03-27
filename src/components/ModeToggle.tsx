@@ -19,7 +19,11 @@ const ModeToggle = () => {
   const { theme, setTheme } = useTheme()
 
   return (
-    <Button className="w-10" onClick={() => setTheme(oppositeTheme[theme])}>
+    <Button
+      className="w-10"
+      aria-label="mode-toggle"
+      onClick={() => setTheme(oppositeTheme[theme])}
+    >
       {iconByTheme[theme]}
     </Button>
   )
