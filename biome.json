@@ -27,7 +27,8 @@
 			"indentStyle": "space",
 			"quoteStyle": "single",
 			"semicolons": "asNeeded",
-			"trailingCommas": "none"
+			"trailingCommas": "none",
+			"lineWidth": 100
 		}
 	}
 }
