@@ -9,17 +9,12 @@ import {
   CardTitle
 } from '@/components/ui/card'
 import { useStore } from '@/store'
-import { useCallback, useMemo } from 'react'
+import { useMemo } from 'react'
 
 const PlayersSelect = () => {
   const { players, selectedValues, toggleSelectedValue } = useStore()
 
   const playersEntitiesMemoized = useMemo(() => Object.entries(players), [players])
-
-  const togglePlayerMemoized = useCallback(
-    (player: number) => useCallback(() => toggleSelectedValue(player), [player]),
-    [toggleSelectedValue]
-  )
 
   return (
     <Card>
@@ -36,7 +31,7 @@ const PlayersSelect = () => {
               <Button
                 key={playerValue}
                 variant={isButtonSelected ? 'default' : 'outline'}
-                onClick={togglePlayerMemoized(playerValue)}
+                onClick={() => toggleSelectedValue(playerValue)}
                 className="w-48"
               >
                 <p className="truncate">{playerName}</p>
