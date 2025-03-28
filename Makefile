@@ -6,6 +6,8 @@ b:
 	pnpm run build
 l:
 	pnpm run lint
+bl:
+	pnpm run babellint
 p:
 	pnpm run preview
 pb:
