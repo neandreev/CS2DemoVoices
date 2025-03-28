@@ -1,4 +1,4 @@
-import { createContext, memo, useContext, useEffect, useMemo, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 
 export type Theme = 'dark' | 'light' | 'system'
 
@@ -20,7 +20,7 @@ const initialState: ThemeProviderState = {
 
 const ThemeProviderContext = createContext<ThemeProviderState>(initialState)
 
-export const ThemeProvider = memo(
+export const ThemeProvider =
   ({
     children,
     defaultTheme = 'system',
@@ -48,16 +48,13 @@ export const ThemeProvider = memo(
       root.classList.add(theme)
     }, [theme])
 
-    const value = useMemo(
-      () => ({
-        theme,
-        setTheme: (theme: Theme): void => {
-          localStorage.setItem(storageKey, theme)
-          setTheme(theme)
-        }
-      }),
-      [theme, storageKey]
-    )
+    const value = {
+      theme,
+      setTheme: (theme: Theme): void => {
+        localStorage.setItem(storageKey, theme)
+        setTheme(theme)
+      }
+    }
 
     return (
       <ThemeProviderContext.Provider {...props} value={value}>
@@ -65,7 +62,6 @@ export const ThemeProvider = memo(
       </ThemeProviderContext.Provider>
     )
   }
-)
 
 export const useTheme = (): ThemeProviderState => {
   const context = useContext(ThemeProviderContext)

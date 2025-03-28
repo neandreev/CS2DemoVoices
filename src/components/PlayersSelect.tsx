@@ -9,12 +9,9 @@ import {
   CardTitle
 } from '@/components/ui/card'
 import { useStore } from '@/store'
-import { useMemo } from 'react'
 
 const PlayersSelect = () => {
   const { players, selectedValues, toggleSelectedValue } = useStore()
-
-  const playersEntitiesMemoized = useMemo(() => Object.entries(players), [players])
 
   return (
     <Card>
@@ -24,7 +21,7 @@ const PlayersSelect = () => {
       </CardHeader>
       <CardContent>
         <div className="grid grid-cols-2 w-l gap-2">
-          {playersEntitiesMemoized.map(([playerName, playerValue]) => {
+          {Object.entries(players).map(([playerName, playerValue]) => {
             const isButtonSelected = selectedValues.has(playerValue)
 
             return (

@@ -1,8 +1,8 @@
-import * as React from 'react'
+import type * as React from 'react'
 
 import { cn } from '@/lib/utils'
 
-const Card = React.memo(({ className, ...props }: React.ComponentProps<'div'>) => {
+const Card = ({ className, ...props }: React.ComponentProps<'div'>) => {
   return (
     <div
       data-slot="card"
@@ -13,9 +13,9 @@ const Card = React.memo(({ className, ...props }: React.ComponentProps<'div'>) =
       {...props}
     />
   )
-})
+}
 
-const CardHeader = React.memo(({ className, ...props }: React.ComponentProps<'div'>) => {
+const CardHeader = ({ className, ...props }: React.ComponentProps<'div'>) => {
   return (
     <div
       data-slot="card-header"
@@ -23,9 +23,9 @@ const CardHeader = React.memo(({ className, ...props }: React.ComponentProps<'di
       {...props}
     />
   )
-})
+}
 
-const CardTitle = React.memo(({ className, ...props }: React.ComponentProps<'div'>) => {
+const CardTitle = ({ className, ...props }: React.ComponentProps<'div'>) => {
   return (
     <div
       data-slot="card-title"
@@ -33,9 +33,9 @@ const CardTitle = React.memo(({ className, ...props }: React.ComponentProps<'div
       {...props}
     />
   )
-})
+}
 
-const CardDescription = React.memo(
+const CardDescription =
   ({ className, ...props }: React.ComponentProps<'div'>) => {
     return (
       <div
@@ -45,9 +45,9 @@ const CardDescription = React.memo(
       />
     )
   }
-)
 
-const CardContent = React.memo(({ className, ...props }: React.ComponentProps<'div'>) => {
+
+const CardContent = ({ className, ...props }: React.ComponentProps<'div'>) => {
   return (
     <div
       data-slot="card-content"
@@ -56,9 +56,9 @@ const CardContent = React.memo(({ className, ...props }: React.ComponentProps<'d
       {...props}
     />
   )
-})
+}
 
-const CardFooter = React.memo(({ className, ...props }: React.ComponentProps<'div'>) => {
+const CardFooter = ({ className, ...props }: React.ComponentProps<'div'>) => {
   return (
     <div
       data-slot="card-footer"
@@ -66,6 +66,6 @@ const CardFooter = React.memo(({ className, ...props }: React.ComponentProps<'di
       {...props}
     />
   )
-})
+}
 
 export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent }

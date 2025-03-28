@@ -1,21 +1,19 @@
 import * as HoverCardPrimitive from '@radix-ui/react-hover-card'
-import * as React from 'react'
+import type * as React from 'react'
 
 import { cn } from '@/lib/utils'
 
-const HoverCard = React.memo(
+const HoverCard =
   ({ ...props }: React.ComponentProps<typeof HoverCardPrimitive.Root>) => {
     return <HoverCardPrimitive.Root data-slot="hover-card" {...props} />
   }
-)
 
-const HoverCardTrigger = React.memo(
+const HoverCardTrigger =
   ({ ...props }: React.ComponentProps<typeof HoverCardPrimitive.Trigger>) => {
     return <HoverCardPrimitive.Trigger data-slot="hover-card-trigger" {...props} />
   }
-)
 
-const HoverCardContent = React.memo(
+const HoverCardContent =
   ({
     className,
     align = 'center',
@@ -37,6 +35,5 @@ const HoverCardContent = React.memo(
       </HoverCardPrimitive.Portal>
     )
   }
-)
 
 export { HoverCard, HoverCardTrigger, HoverCardContent }

@@ -1,6 +1,6 @@
 import { Slot } from '@radix-ui/react-slot'
 import { type VariantProps, cva } from 'class-variance-authority'
-import * as React from 'react'
+import type * as React from 'react'
 
 import { cn } from '@/lib/utils'
 
@@ -33,7 +33,7 @@ const buttonVariants = cva(
   }
 )
 
-const Button = React.memo(
+const Button =
   ({
     className,
     variant,
@@ -44,7 +44,7 @@ const Button = React.memo(
     VariantProps<typeof buttonVariants> & {
       asChild?: boolean
     }) => {
-    const Comp = React.useMemo(() => (asChild ? Slot : 'button'), [asChild])
+    const Comp = asChild ? Slot : 'button'
 
     return (
       <Comp
@@ -54,6 +54,5 @@ const Button = React.memo(
       />
     )
   }
-)
 
 export { Button, buttonVariants }

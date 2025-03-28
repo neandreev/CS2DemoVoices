@@ -1,8 +1,8 @@
-import * as React from 'react'
+import type * as React from 'react'
 
 import { cn } from '@/lib/utils'
 
-const Textarea = React.memo(
+const Textarea =
   ({ className, ...props }: React.ComponentProps<'textarea'>) => {
     return (
       <textarea
@@ -15,6 +15,5 @@ const Textarea = React.memo(
       />
     )
   }
-)
 
 export { Textarea }
