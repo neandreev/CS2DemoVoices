@@ -12,7 +12,7 @@ interface Players {
   [playerName: string]: number
 }
 
-interface StoreState {
+export interface StoreState {
   appState: AppState
   stringToParse: string
   players: Players
@@ -55,7 +55,7 @@ export const useStore = create<StoreState>((set, get) => ({
   setStringToParse: (stringToParse): void => set({ stringToParse }),
   setPlayers: (players: Players): void => set({ players }),
   toggleSelectedValue: (value): void => {
-    const selectedValues = get().selectedValues
+    const selectedValues = new Set(get().selectedValues)
 
     if (selectedValues.has(value)) {
       selectedValues.delete(value)
