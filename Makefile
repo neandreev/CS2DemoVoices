@@ -1,10 +1,10 @@
 i:
-	npm i
+	pnpm i
 d:
-	npm run dev
+	pnpm run dev
 b:
-	npm run build
+	pnpm run build
 p:
-	npm run preview
+	pnpm run preview
 pb:
-	npm run build && npm run preview
+	pnpm run build && pnpm run preview
