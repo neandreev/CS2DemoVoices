@@ -8,6 +8,8 @@ l:
 	pnpm run lint
 bl:
 	pnpm run babellint
+c:
+	pnpm run check
 p:
 	pnpm run preview
 pb:

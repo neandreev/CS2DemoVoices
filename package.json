@@ -8,6 +8,7 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "babellint": "pnpx @biomejs/biome lint ./src",
+    "check": "pnpm biome check --write ./src",
     "preview": "vite preview"
   },
   "dependencies": {
