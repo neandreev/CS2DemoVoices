@@ -29,13 +29,21 @@ const App = () => {
             <div className="flex gap-2">
               <ModeToggle />
               {appState !== AppState.Input ? (
-                <Button variant="outline" className="w-fit" onClick={() => goToPreviousPage()}>
+                <Button
+                  variant="outline"
+                  className="w-fit"
+                  onClick={() => goToPreviousPage()}
+                >
                   <ArrowLeft />
                   {i18next.t('back')}
                 </Button>
               ) : null}
               {appState !== AppState.Input ? (
-                <Button variant="outline" className="w-fit" onClick={() => goToInputPage()}>
+                <Button
+                  variant="outline"
+                  className="w-fit"
+                  onClick={() => goToInputPage()}
+                >
                   <RefreshCcw />
                   {i18next.t('again')}
                 </Button>

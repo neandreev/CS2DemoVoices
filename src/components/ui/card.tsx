@@ -35,17 +35,15 @@ const CardTitle = ({ className, ...props }: React.ComponentProps<'div'>) => {
   )
 }
 
-const CardDescription =
-  ({ className, ...props }: React.ComponentProps<'div'>) => {
-    return (
-      <div
-        data-slot="card-description"
-        className={cn('text-muted-foreground text-sm cursor-default', className)}
-        {...props}
-      />
-    )
-  }
-
+const CardDescription = ({ className, ...props }: React.ComponentProps<'div'>) => {
+  return (
+    <div
+      data-slot="card-description"
+      className={cn('text-muted-foreground text-sm cursor-default', className)}
+      {...props}
+    />
+  )
+}
 
 const CardContent = ({ className, ...props }: React.ComponentProps<'div'>) => {
   return (
