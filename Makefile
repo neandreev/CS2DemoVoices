@@ -4,6 +4,8 @@ d:
 	pnpm run dev
 b:
 	pnpm run build
+l:
+	pnpm run lint
 p:
 	pnpm run preview
 pb:
