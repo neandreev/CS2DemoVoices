@@ -1,5 +1,5 @@
 import i18next from 'i18next'
-import { toast } from 'sonner'
+import { type ToastT, toast } from 'sonner'
 import { create } from 'zustand'
 
 export enum AppState {
@@ -18,9 +18,13 @@ export interface StoreState {
   players: Players
   selectedValues: Set<number>
   resultString: string
+  latestToastId: ToastT['id'] | null
   setAppState: (appState: AppState) => void
   setStringToParse: (stringToParse: string) => void
   setPlayers: (players: Players) => void
+  setLatestToastId: (latestToastId: ToastT['id']) => void
+  showToast: (text: string) => void
+  dismissLatestToast: () => void
   toggleSelectedValue: (value: number) => void
   parseString: () => void
   generateResultString: () => void
@@ -51,9 +55,22 @@ export const useStore = create<StoreState>((set, get) => ({
   players: {},
   selectedValues: new Set([]),
   resultString: '',
+  latestToastId: null,
   setAppState: (appState: AppState): void => set({ appState }),
   setStringToParse: (stringToParse): void => set({ stringToParse }),
   setPlayers: (players: Players): void => set({ players }),
+  setLatestToastId: (latestToastId: ToastT['id']): void => set({ latestToastId }),
+  showToast: (text: string) => {
+    const latestToastId = toast.success(i18next.t(text))
+
+    get().dismissLatestToast()
+    get().setLatestToastId(latestToastId)
+  },
+  dismissLatestToast: (): void => {
+    const latestToastId = get().latestToastId
+
+    if (latestToastId) toast.dismiss(latestToastId)
+  },
   toggleSelectedValue: (value): void => {
     const selectedValues = new Set(get().selectedValues)
 
@@ -118,9 +135,10 @@ export const useStore = create<StoreState>((set, get) => ({
   },
   goToSelectPage: (): void => {
     get().parseString()
+    get().dismissLatestToast()
 
     if (Object.keys(get().players).length !== 10) {
-      toast.error(i18next.t('incorrectInput'))
+      get().showToast('incorrectInput')
 
       return
     }
@@ -129,9 +147,10 @@ export const useStore = create<StoreState>((set, get) => ({
   },
   goToResultPage: (): void => {
     get().generateResultString()
+    get().dismissLatestToast()
 
     if (get().selectedValues.size === 0) {
-      toast.error(i18next.t('atLeastOne'))
+      get().showToast('atLeastOne')
 
       return
     }
@@ -141,11 +160,11 @@ export const useStore = create<StoreState>((set, get) => ({
   copyCommand: async (): Promise<void> => {
     await navigator.clipboard.writeText('voice_show_mute')
 
-    toast.success(i18next.t('copied'))
+    get().showToast('copied')
   },
   copyResult: async (): Promise<void> => {
     await navigator.clipboard.writeText(get().resultString)
 
-    toast.success(i18next.t('copied'))
+    get().showToast('copied')
   }
 }))
