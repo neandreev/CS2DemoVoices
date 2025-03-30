@@ -80,7 +80,7 @@ const App = () => {
               </MotionConfig>
             </div>
             <div className="h-120">
-              <AnimatePresence mode="wait">
+              <AnimatePresence initial={false} mode="wait">
                 {appState === AppState.Input ? (
                   <PlayersInput key="playersSelectCard" />
                 ) : null}
