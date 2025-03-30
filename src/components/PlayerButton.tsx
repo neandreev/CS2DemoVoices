@@ -14,7 +14,6 @@ const PlayerButton = ({ playerName, playerValue, toggleSelectedValue }: PlayerBu
     <Button
       variant={isSelected ? 'default' : 'outline'}
       onClick={() => toggleSelectedValue(playerValue)}
-      className="w-48"
     >
       <p className="truncate">{playerName}</p>
     </Button>
