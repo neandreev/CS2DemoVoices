@@ -1,3 +1,4 @@
+import type { CheckedState } from '@radix-ui/react-checkbox'
 import i18next from 'i18next'
 import { type ToastT, toast } from 'sonner'
 import { create } from 'zustand'
@@ -15,12 +16,16 @@ interface Players {
 export interface StoreState {
   appState: AppState
   stringToParse: string
+  isPlayerNeeded: CheckedState
+  playerName: string
   players: Players
   selectedValues: Set<number>
   resultString: string
   latestToastId: ToastT['id'] | null
   setAppState: (appState: AppState) => void
   setStringToParse: (stringToParse: string) => void
+  setIsPlayerNeeded: (isPlayerNeeded: CheckedState) => void
+  setPlayerName: (playerName: string) => void
   setPlayers: (players: Players) => void
   setLatestToastId: (latestToastId: ToastT['id']) => void
   showToast: (text: string) => void
@@ -49,29 +54,60 @@ const splitPlayersMuteValues = (stringArr: string[]): Players => {
   }, {})
 }
 
+const findPlayerGap = (knownPlayersValues: number[]) => {
+  for (let i = 0; i < knownPlayersValues.length - 1; i++) {
+    if (knownPlayersValues[i + 1] !== knownPlayersValues[i] + 1) {
+      return knownPlayersValues[i] + 1
+    }
+  }
+
+  return 0
+}
+
+const appendPlayerValue = (players: Players, playerName: string): Players => {
+  const playersValues = Object.values(players)
+
+  const lowestPlayerValue = 3
+  const highestPlayerValue = 12
+
+  if (!playersValues.includes(lowestPlayerValue)) {
+    players[playerName] = lowestPlayerValue
+  } else if (!playersValues.includes(highestPlayerValue)) {
+    players[playerName] = highestPlayerValue
+  } else {
+    players[playerName] = findPlayerGap(playersValues)
+  }
+
+  return players
+}
+
 export const useStore = create<StoreState>((set, get) => ({
   appState: AppState.Input,
   stringToParse: '',
+  isPlayerNeeded: true,
+  playerName: '',
   players: {},
   selectedValues: new Set([]),
   resultString: '',
   latestToastId: null,
-  setAppState: (appState: AppState): void => set({ appState }),
-  setStringToParse: (stringToParse): void => set({ stringToParse }),
-  setPlayers: (players: Players): void => set({ players }),
-  setLatestToastId: (latestToastId: ToastT['id']): void => set({ latestToastId }),
-  showToast: (text: string) => {
+  setAppState: (appState) => set({ appState }),
+  setStringToParse: (stringToParse) => set({ stringToParse }),
+  setIsPlayerNeeded: (isPlayerNeeded) => set({ isPlayerNeeded }),
+  setPlayerName: (playerName) => set({ playerName }),
+  setPlayers: (players) => set({ players }),
+  setLatestToastId: (latestToastId) => set({ latestToastId }),
+  showToast: (text) => {
     const latestToastId = toast.success(i18next.t(text))
 
     get().dismissLatestToast()
     get().setLatestToastId(latestToastId)
   },
-  dismissLatestToast: (): void => {
+  dismissLatestToast: () => {
     const latestToastId = get().latestToastId
 
     if (latestToastId) toast.dismiss(latestToastId)
   },
-  toggleSelectedValue: (value): void => {
+  toggleSelectedValue: (value) => {
     const selectedValues = new Set(get().selectedValues)
 
     if (selectedValues.has(value)) {
@@ -82,7 +118,7 @@ export const useStore = create<StoreState>((set, get) => ({
 
     set({ selectedValues })
   },
-  parseString: (): void => {
+  parseString: () => {
     const stringToParse = get().stringToParse
 
     const strings = stringToParse
@@ -90,11 +126,17 @@ export const useStore = create<StoreState>((set, get) => ({
       .map((string) => string.trim())
       .filter((string) => isFirstCharNum(string))
 
-    const players = splitPlayersMuteValues(strings) as Players
+    const parsedPlayers = splitPlayersMuteValues(strings) as Players
+    const players = get().isPlayerNeeded
+      ? appendPlayerValue(
+          parsedPlayers,
+          get().playerName || i18next.t('defaultPlayerName')
+        )
+      : parsedPlayers
 
-    set({ players })
+    set({ players: players })
   },
-  generateResultString: (): void => {
+  generateResultString: () => {
     const selectedValues = get().selectedValues
 
     const indicesValue = [...selectedValues].reduce(
@@ -104,7 +146,7 @@ export const useStore = create<StoreState>((set, get) => ({
 
     set({ resultString: `tv_listen_voice_indices ${indicesValue}` })
   },
-  goToNextPage: (): void => {
+  goToNextPage: () => {
     const appState = get().appState
 
     const nextPageByAppState = {
@@ -115,7 +157,7 @@ export const useStore = create<StoreState>((set, get) => ({
 
     nextPageByAppState()
   },
-  goToPreviousPage: (): void => {
+  goToPreviousPage: () => {
     const appState = get().appState
 
     if (appState === AppState.Input) return
@@ -124,16 +166,18 @@ export const useStore = create<StoreState>((set, get) => ({
       appState: appState - 1
     })
   },
-  goToInputPage: (): void => {
+  goToInputPage: () => {
     set({
       appState: AppState.Input,
       stringToParse: '',
+      isPlayerNeeded: false,
+      playerName: '',
       players: {},
       selectedValues: new Set([]),
       resultString: ''
     })
   },
-  goToSelectPage: (): void => {
+  goToSelectPage: () => {
     get().parseString()
     get().dismissLatestToast()
 
@@ -145,7 +189,7 @@ export const useStore = create<StoreState>((set, get) => ({
 
     set({ appState: AppState.Select, selectedValues: new Set([]) })
   },
-  goToResultPage: (): void => {
+  goToResultPage: () => {
     get().generateResultString()
     get().dismissLatestToast()
 
@@ -157,12 +201,12 @@ export const useStore = create<StoreState>((set, get) => ({
 
     set({ appState: AppState.Result })
   },
-  copyCommand: async (): Promise<void> => {
+  copyCommand: async () => {
     await navigator.clipboard.writeText('voice_show_mute')
 
     get().showToast('copied')
   },
-  copyResult: async (): Promise<void> => {
+  copyResult: async () => {
     await navigator.clipboard.writeText(get().resultString)
 
     get().showToast('copied')
