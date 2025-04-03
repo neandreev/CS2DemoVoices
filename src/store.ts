@@ -170,7 +170,7 @@ export const useStore = create<StoreState>((set, get) => ({
     set({
       appState: AppState.Input,
       stringToParse: '',
-      isPlayerNeeded: false,
+      isPlayerNeeded: true,
       playerName: '',
       players: {},
       selectedValues: new Set([]),
