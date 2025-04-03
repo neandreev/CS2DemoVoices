@@ -1,6 +1,7 @@
 import './index.css'
 
 import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/react'
 import i18next from 'i18next'
 import LanguageDetector from 'i18next-browser-languagedetector'
 import React from 'react'
@@ -66,6 +67,7 @@ i18next.use(LanguageDetector).init({
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <Analytics />
+    <SpeedInsights />
     <App />
     <Toaster position="top-center" />
   </React.StrictMode>
