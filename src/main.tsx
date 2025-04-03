@@ -21,7 +21,7 @@ i18next.use(LanguageDetector).init({
         back: 'Back',
         copied: 'The command has been copied',
         isPlayerNeeded: 'My name is missing in command result',
-        isPlayerNeededDesc: 'Watching demo with yourself',
+        isPlayerNeededDesc: 'Watching my demo',
         defaultPlayerName: 'You',
         enterName: 'Enter your name (optional)',
         enterString: 'Execute',
