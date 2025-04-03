@@ -25,7 +25,7 @@ const App = () => {
                 <div className="flex gap-2">
                   <ModeToggle />
                   <AnimatePresence>
-                    {appState !== AppState.Input ? (
+                    {appState !== AppState.Input && (
                       <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
@@ -40,8 +40,8 @@ const App = () => {
                           {i18next.t('back')}
                         </Button>
                       </motion.div>
-                    ) : null}
-                    {appState !== AppState.Input ? (
+                    )}
+                    {appState !== AppState.Input && (
                       <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
@@ -56,11 +56,11 @@ const App = () => {
                           {i18next.t('again')}
                         </Button>
                       </motion.div>
-                    ) : null}
+                    )}
                   </AnimatePresence>
                 </div>
                 <AnimatePresence>
-                  {appState !== AppState.Result ? (
+                  {appState !== AppState.Result && (
                     <motion.div
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
@@ -75,19 +75,15 @@ const App = () => {
                         {i18next.t('next')}
                       </Button>
                     </motion.div>
-                  ) : null}
+                  )}
                 </AnimatePresence>
               </MotionConfig>
             </div>
             <div className="h-120">
               <AnimatePresence initial={false} mode="wait">
-                {appState === AppState.Input ? (
-                  <PlayersInput key="playersSelectCard" />
-                ) : null}
-                {appState === AppState.Select ? (
-                  <PlayersSelect key="playersInputCard" />
-                ) : null}
-                {appState === AppState.Result ? <Result key="resultCard" /> : null}
+                {appState === AppState.Input && <PlayersInput key="playersSelectCard" />}
+                {appState === AppState.Select && <PlayersSelect key="playersInputCard" />}
+                {appState === AppState.Result && <Result key="resultCard" />}
               </AnimatePresence>
             </div>
           </div>

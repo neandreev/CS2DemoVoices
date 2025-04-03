@@ -1,7 +1,7 @@
 import { Moon, Sun } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
-import { type Theme, useTheme } from '@/themeProvider'
+import { type Theme, useTheme } from '@/theme'
 
 const iconByTheme = {
   dark: <Sun />,
